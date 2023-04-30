@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrtypt = require('bcrypt');
 
 import User from '../models/Muser';
+import { ISignIn } from '../types/auth';
 // =============================
 
 export const signIn = async (
@@ -11,7 +12,7 @@ export const signIn = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const { email, password } = req.body;
+	const { email, password }: ISignIn = req.body;
 	try {
 		const user = await User.findOne({ email }).select('email    password');
 		if (user) {

@@ -6,3 +6,10 @@ export interface IGoodDataIncome {
   price: number,
   rating: number,
 }
+
+export interface IGoodFilter {
+  brand?: string,
+  categorie?: string,
+  price?: number,
+  rating?: number,
+}

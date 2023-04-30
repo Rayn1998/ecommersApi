@@ -1,12 +1,15 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
 import express, { Express } from 'express';
 import mongoose from 'mongoose';
 const cookieParser = require('cookie-parser');
 
 import router from './routes';
+
 // ==============
 const app: Express = express();
 
-const port = 3001;
+const { PORT = 3001 } = process.env;
 
 // =================
 app.use(express.json());
@@ -16,9 +19,9 @@ app.use('/', router);
 
 // ==============
 mongoose
-	.connect('mongodb://127.0.0.1:27017/eshopdb')
+	.connect(process.env.MONGO_DB)
 	.then(() => {
-		app.listen(port, () => {
+		app.listen(PORT, () => {
 			console.log('API works');
 		});
 	})
