@@ -18,6 +18,15 @@ const user = new Schema<IUser>({
 		minLength: 8,
 		required: true,
 	},
+	favourites: {
+		type: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'good',
+				default: [],
+			},
+		],
+	},
 	role: {
 		type: String,
 		enum: ['customer', 'admin'],

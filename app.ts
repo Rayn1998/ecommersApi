@@ -1,15 +1,16 @@
-import express from 'express';
+import express, { Express } from 'express';
 import mongoose from 'mongoose';
+const cookieParser = require('cookie-parser');
 
 import router from './routes';
-
 // ==============
-const app = express();
+const app: Express = express();
 
 const port = 3001;
 
 // =================
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/', router);
 

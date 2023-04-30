@@ -7,6 +7,7 @@ export interface IUserDataIncome {
 
 export interface IUser extends IUserDataIncome {
 	role: string;
+  favourites?: string[],
 }
 
 export interface IUserOptional {

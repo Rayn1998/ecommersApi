@@ -38,3 +38,9 @@ export const deleteUserValidation = {
 		id: Joi.string().length(24).hex().required(),
 	}),
 };
+
+export const FavouritesValidation = {
+	params: Joi.object().keys({
+		id: Joi.string().length(24).hex().required(),
+	}),
+};
