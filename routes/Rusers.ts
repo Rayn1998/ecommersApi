@@ -1,14 +1,12 @@
 import express from 'express';
-import { celebrate, Joi } from 'celebrate';
+import { celebrate } from 'celebrate';
 import {
-	createUser,
 	updateUser,
 	deleteUser,
 	addFavourite,
 	removeFavourite,
 } from '../controllers/Cusers';
 import {
-	createUserValidation,
 	updateUserValidation,
 	deleteUserValidation,
 	FavouritesValidation,
@@ -17,7 +15,7 @@ import {
 
 const users = express.Router();
 
-users.post('/', celebrate(createUserValidation), createUser);
+// users.post('/', celebrate(createUserValidation), createUser);
 
 users.put('/:id', celebrate(FavouritesValidation), addFavourite);
 
