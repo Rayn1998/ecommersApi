@@ -1,6 +1,7 @@
 import express from 'express';
 import { celebrate } from 'celebrate';
 import {
+	getUser,
 	updateUser,
 	deleteUser,
 	addFavourite,
@@ -16,6 +17,7 @@ import {
 const users = express.Router();
 
 // users.post('/', celebrate(createUserValidation), createUser);
+users.get('/', getUser);
 
 users.put('/:id', celebrate(FavouritesValidation), addFavourite);
 

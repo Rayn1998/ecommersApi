@@ -20,5 +20,9 @@ router.use('/goods', checkAuth, goods);
 
 router.use(errors());
 
+router.use('*', (req, res) => {
+  res.status(400).send({ message: 'Page not found' });
+});
+
 // =====================
 export default router;

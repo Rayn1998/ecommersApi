@@ -1,4 +1,4 @@
-class notFoundError extends Error {
+class NotFoundError extends Error {
   statusCode: number;
 
   constructor(message: string) {
@@ -7,4 +7,4 @@ class notFoundError extends Error {
   }
 }
 
-export default notFoundError;
+export default NotFoundError;

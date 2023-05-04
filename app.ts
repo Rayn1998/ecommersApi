@@ -14,11 +14,12 @@ const { PORT = 3001 } = process.env;
 
 // =================
 app.use(cors({
-	origin: '*',
+	origin: 'http://localhost:3000',
+
 }))
 
-app.use(express.json());
 app.use(cookieParser());
+app.use(express.json());
 
 app.use('/', router);
 
@@ -27,7 +28,7 @@ mongoose
 	.connect(process.env.MONGO_DB)
 	.then(() => {
 		app.listen(PORT, () => {
-			console.log('API works');
+			console.log(`API works on port: ${PORT}`);
 		});
 	})
 	.catch((err) => console.log(err));

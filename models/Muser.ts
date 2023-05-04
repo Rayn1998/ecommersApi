@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { IUser } from '../types/users';
+import { emailCheck } from '../utils/regExpressions';
 
 const user = new Schema<IUser>({
 	name: {
@@ -11,7 +12,7 @@ const user = new Schema<IUser>({
 	email: {
 		type: String,
 		required: true,
-		match: /^[a-z0-9]{3,}@[a-z]{2,}\.[a-z]{2,}/,
+		match: emailCheck,
 	},
 	password: {
 		type: String,
