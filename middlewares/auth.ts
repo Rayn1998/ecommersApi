@@ -34,13 +34,13 @@ export const signIn = async (
 	}
 };
 
-export const signOut = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
-  res.clearCookie('token').end();
-}
+// export const signOut = async (
+// 	req: Request,
+// 	res: Response,
+// 	next: NextFunction
+// ) => {
+//   res.clearCookie('token').end();
+// }
 
 export const checkAuth = async (
 	req: Request,
