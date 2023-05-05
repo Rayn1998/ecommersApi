@@ -14,7 +14,7 @@ import {
 	emailAlreadyUsed,
 } from '../utils/constants';
 import NotFoundError from '../utils/errors/NotFoundError';
-import BadAuthError from '../utils/errors/badAuthError';
+import BadAuthError from '../utils/errors/BadAuthError';
 // ==========================
 
 export const createUser = async (
