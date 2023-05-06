@@ -28,7 +28,6 @@ export const updateUserValidation = {
 	body: Joi.object().keys({
 		name: Joi.string().min(2).max(30),
 		email: Joi.string().email(),
-		password: Joi.string().min(8),
 		role: Joi.string(),
 	}),
 };

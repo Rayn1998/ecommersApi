@@ -70,12 +70,12 @@ export const updateUser = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const { name, email, password, role }: IUserOptional = req.body;
+	const { name, email, role }: IUserOptional = req.body;
 	const { id } = req.params;
 	try {
 		const user = await User.findByIdAndUpdate(
 			id,
-			{ name, email, password, role },
+			{ name, email, role },
 			{ new: true, runValidators: true }
 		);
 		if (user) {
@@ -85,7 +85,8 @@ export const updateUser = async (
 			throw new NotFoundError(notFoundErrorMsg);
 		}
 	} catch (err) {
-		throw new serverError(serverErrorMsg);
+		next(new serverError(serverErrorMsg));
+		return;
 	}
 };
 
