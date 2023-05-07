@@ -124,7 +124,7 @@ export const deleteUser = async (
 			throw new NotFoundError(notFoundErrorMsg);
 		}
 	} catch (err) {
-		throw new serverError(serverErrorMsg);
+		next(err);
 	}
 };
 

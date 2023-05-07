@@ -3,7 +3,12 @@ import { Request, Response, NextFunction } from 'express';
 import { IGoodDataIncome } from '../types/goods';
 import { IGoodFilter } from '../types/goods';
 import serverError from '../utils/errors/serverError';
-import { serverErrorMsg } from '../utils/constants';
+import NotFoundError from '../utils/errors/NotFoundError';
+import {
+	goodDeleted,
+	serverErrorMsg,
+	notFoundErrorMsg,
+} from '../utils/constants';
 // =========================
 
 export const createGood = async (
@@ -11,8 +16,7 @@ export const createGood = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const { name, brand, categorie, image, price }: IGoodDataIncome =
-		req.body;
+	const { name, brand, categorie, image, price }: IGoodDataIncome = req.body;
 	try {
 		const good = await Good.create<IGoodDataIncome>({
 			name,
@@ -24,6 +28,25 @@ export const createGood = async (
 		res.status(200).send({ data: good });
 	} catch (err) {
 		throw new serverError(serverErrorMsg);
+	}
+};
+
+export const deleteGood = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const { id } = req.params;
+	try {
+		const good = await Good.findByIdAndDelete(id);
+		if (good) {
+			res.status(200).send({ message: goodDeleted, good });
+			return;
+		} else {
+			throw new NotFoundError(notFoundErrorMsg);
+		}
+	} catch (err) {
+		next(err);
 	}
 };
 

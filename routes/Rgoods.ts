@@ -4,6 +4,7 @@ import {
 	createGood,
 	getAllGoods,
 	getFilteredGoods,
+	deleteGood,
 } from '../controllers/Cgoods';
 import { createGoodValidation } from '../utils/celebrateValidation';
 // =================================
@@ -15,5 +16,7 @@ goods.get('/', getAllGoods);
 goods.get('/filtered', getFilteredGoods);
 
 goods.post('/', celebrate(createGoodValidation), createGood);
+
+goods.delete('/:id', deleteGood);
 
 export default goods;
