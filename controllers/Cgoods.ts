@@ -11,7 +11,7 @@ export const createGood = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const { name, brand, categorie, image, price, rating }: IGoodDataIncome =
+	const { name, brand, categorie, image, price }: IGoodDataIncome =
 		req.body;
 	try {
 		const good = await Good.create<IGoodDataIncome>({
@@ -20,7 +20,6 @@ export const createGood = async (
 			categorie,
 			image,
 			price,
-			rating,
 		});
 		res.status(200).send({ data: good });
 	} catch (err) {

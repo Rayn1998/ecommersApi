@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { IGoodDataIncome } from '../types/goods';
+import { IGoodModel } from '../types/goods';
 
-const good = new Schema<IGoodDataIncome>({
+const good = new Schema<IGoodModel>({
   name: {
     type: String,
     required: true,
@@ -25,7 +25,7 @@ const good = new Schema<IGoodDataIncome>({
   },
   rating: {
     type: Number,
-    required: true,
+    default: 0,
   },
 });
 

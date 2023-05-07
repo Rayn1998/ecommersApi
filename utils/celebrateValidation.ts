@@ -9,7 +9,6 @@ export const createGoodValidation = {
 		categorie: Joi.string().required(),
 		image: Joi.string().required(),
 		price: Joi.number().required(),
-		rating: Joi.number().required(),
 	}),
 };
 

@@ -4,6 +4,9 @@ export interface IGoodDataIncome {
   categorie: string,
   image: string,
   price: number,
+}
+
+export interface IGoodModel extends IGoodDataIncome {
   rating: number,
 }
 
@@ -11,5 +14,4 @@ export interface IGoodFilter {
   brand?: string,
   categorie?: string,
   price?: number,
-  rating?: number,
 }

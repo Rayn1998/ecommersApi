@@ -6,6 +6,7 @@ import {
 	deleteUser,
 	addFavourite,
 	removeFavourite,
+	getAllUsers,
 } from '../controllers/Cusers';
 import {
 	updateUserValidation,
@@ -18,6 +19,8 @@ const users = express.Router();
 
 // users.post('/', celebrate(createUserValidation), createUser);
 users.get('/', getUser);
+
+users.get('/all', getAllUsers);
 
 users.put('/:id', celebrate(FavouritesValidation), addFavourite);
 

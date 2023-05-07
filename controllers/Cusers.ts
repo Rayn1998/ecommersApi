@@ -65,6 +65,25 @@ export const getUser = async (
 	}
 };
 
+export const getAllUsers = async (
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) => {
+	try {
+		const users = await User.find({})
+		if (users) {
+			res.status(200).send({ data: users });
+			return;
+		} else {
+			throw new NotFoundError(notFoundErrorMsg);
+		}
+	} catch (err) {
+		next(new serverError(serverErrorMsg));
+		return;
+	}
+}
+
 export const updateUser = async (
 	req: Request,
 	res: Response,
