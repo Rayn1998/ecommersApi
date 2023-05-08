@@ -54,7 +54,7 @@ export const getUser = async (
 		const token = req.headers.authorization;
 		payload = jwt.verify(token, 'secret');
 		try {
-			const user = await User.findById(payload.id).select(
+			const user = await User.findById(payload.id).populate('favourites').select(
 				'email favourites name role'
 			);
 			res.status(200).send(user);
@@ -134,7 +134,7 @@ export const addFavourite = async (
 	next: NextFunction
 ) => {
 	const { id: goodId } = req.params;
-	const userId = '644e12639e07e034fb13c5d3';
+	const { id: userId }: any = req.user;
 	try {
 		const user = await User.findByIdAndUpdate(
 			userId,
@@ -158,7 +158,8 @@ export const removeFavourite = async (
 	next: NextFunction
 ) => {
 	const { id: goodId } = req.params;
-	const userId = '644e12639e07e034fb13c5d3';
+	const { id: userId }: any = req.user;
+	// console.log(goodId);
 	try {
 		const user = await User.findByIdAndUpdate(
 			userId,

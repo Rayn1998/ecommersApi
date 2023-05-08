@@ -41,7 +41,7 @@ export const checkAuth = async (
 ) => {
 	const token = req.headers.authorization;
   if (token !== 'null') {
-    let verification: boolean;
+    let verification: Request['user'];
 		verification = await jwt.verify(token, 'secret');
 		req.user = verification;
 		next();
