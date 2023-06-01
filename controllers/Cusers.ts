@@ -96,7 +96,7 @@ export const updateUser = async (
 			id,
 			{ name, email, role },
 			{ new: true, runValidators: true }
-		);
+		).populate('favourites');
 		if (user) {
 			res.status(200).send({ data: user });
 			return;

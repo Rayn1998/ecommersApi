@@ -1,7 +1,10 @@
 import Good from '../models/Mgood';
 import { Request, Response, NextFunction } from 'express';
-import { IGoodDataIncome } from '../types/goods';
-import { IGoodFilter } from '../types/goods';
+import {
+	IGoodDataIncome,
+	IGoodDataUpdateIncome,
+	IGoodFilter,
+} from '../types/goods';
 import serverError from '../utils/errors/serverError';
 import NotFoundError from '../utils/errors/NotFoundError';
 import {
@@ -14,7 +17,7 @@ import {
 export const createGood = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	const { name, brand, categorie, image, price }: IGoodDataIncome = req.body;
 	try {
@@ -31,10 +34,35 @@ export const createGood = async (
 	}
 };
 
+export const updateGood = async (
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) => {
+	const {
+		_id: id,
+		name,
+		brand,
+		categorie,
+		image,
+		price,
+	}: IGoodDataUpdateIncome = req.body;
+	try {
+		const good = await Good.findByIdAndUpdate(id, { name, brand, categorie, image, price }, { runValidators: true, new: true });
+		if (good) {
+			res.status(200).send(good);
+		} else {
+			new NotFoundError(notFoundErrorMsg);
+		}
+	} catch (err) {
+		next(err);
+	}
+};
+
 export const deleteGood = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	const { id } = req.params;
 	try {
@@ -53,7 +81,7 @@ export const deleteGood = async (
 export const getAllGoods = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	try {
 		const goods = await Good.find({});
@@ -66,7 +94,7 @@ export const getAllGoods = async (
 export const getFilteredGoods = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	const filter: IGoodFilter = req.body;
 	let goods: object[];

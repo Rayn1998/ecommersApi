@@ -6,6 +6,15 @@ export interface IGoodDataIncome {
   price: number,
 }
 
+export interface IGoodDataUpdateIncome {
+  _id: string,
+  name?: string,
+  brand?: string,
+  categorie?: string,
+  image?: string,
+  price?: number,
+}
+
 export interface IGoodModel extends IGoodDataIncome {
   rating: number,
 }

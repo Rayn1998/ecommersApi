@@ -17,7 +17,6 @@ import {
 
 const users = express.Router();
 
-// users.post('/', celebrate(createUserValidation), createUser);
 users.get('/', getUser);
 
 users.get('/all', getAllUsers);
