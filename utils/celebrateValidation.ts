@@ -12,6 +12,17 @@ export const createGoodValidation = {
 	}),
 };
 
+export const updateGoodValidation = {
+	body: Joi.object().keys({
+		_id: Joi.string().required(),
+		name: Joi.string(),
+		brand: Joi.string(),
+		categorie: Joi.string(),
+		image: Joi.string(),
+		price: Joi.number(),
+	}),
+};
+
 // USERS
 
 export const createUserValidation = {

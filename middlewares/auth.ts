@@ -7,7 +7,14 @@ import User from '../models/Muser';
 import { ISignIn } from '../types/auth';
 // =============================
 
-type TUser = {_id: string, email: string, password?: string, name: string, favourites: string[], token: string};
+type TUser = {
+	_id: string, 
+	email: string, 
+	password?: string, 
+	name: string, 
+	favourites: string[], 
+	token: string
+};
 
 export const signIn = async (
 	req: Request,
@@ -42,9 +49,18 @@ export const checkAuth = async (
 	const token = req.headers.authorization;
   if (token !== 'null') {
     let verification: Request['user'];
-		verification = await jwt.verify(token, 'secret');
-		req.user = verification;
-		next();
+		try {
+			verification = await jwt.verify(token, 'secret');
+			req.user = verification;
+			next();
+		} catch (err: any) {
+			if (err.message === 'jwt expired') {
+				res.status(401).send({ message: 'You should authorize again, your token expired...' });
+				return;
+			}
+			res.status(400).send({ message: 'User unauthorized' });
+			return;
+		}
   } else {
     res.status(400).send({ message: 'User unauthorized' });
 		return;
