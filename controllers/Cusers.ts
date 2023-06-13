@@ -91,6 +91,7 @@ export const updateUser = async (
 ) => {
 	const { name, email, role }: IUserOptional = req.body;
 	const { id } = req.params;
+	console.log(id, name, email, role);
 	try {
 		const user = await User.findByIdAndUpdate(
 			id,
@@ -159,7 +160,6 @@ export const removeFavourite = async (
 ) => {
 	const { id: goodId } = req.params;
 	const { id: userId }: any = req.user;
-	// console.log(goodId);
 	try {
 		const user = await User.findByIdAndUpdate(
 			userId,
