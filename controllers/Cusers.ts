@@ -91,8 +91,11 @@ export const updateUser = async (
 ) => {
 	const { name, email, role }: IUserOptional = req.body;
 	const { id } = req.params;
-	console.log(id, name, email, role);
 	try {
+		const emailCheck = await User.findOne({email: email});
+		if (emailCheck !== null) {
+			throw new serverError(serverErrorMsg);
+		} 
 		const user = await User.findByIdAndUpdate(
 			id,
 			{ name, email, role },
