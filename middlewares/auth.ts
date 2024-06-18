@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 
 import User from '../models/Muser';
 import { ISignIn } from '../types/auth';
+import BadAuthError from '../utils/errors/BadAuthError';
 // =============================
 
 type TUser = {
@@ -31,13 +32,13 @@ export const signIn = async (
 				const userSend: TUser = { _id: user._id, email: user.email, name: user.name, favourites: user.favourites, token };
 				res.status(200).send(userSend);
 			} else {
-				throw new Error;
+				throw new BadAuthError('incorrect password');
 			}
 		} else {
 			throw new Error;
 		}
-	} catch (err) {
-		res.status(400).send({ message: 'data is incorrect ' });
+	} catch (err: any) {
+		res.status(err.statusCode).send({ message: err.message });
 	}
 };
 

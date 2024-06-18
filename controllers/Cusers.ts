@@ -92,10 +92,12 @@ export const updateUser = async (
 	const { name, email, role }: IUserOptional = req.body;
 	const { id } = req.params;
 	try {
-		const emailCheck = await User.findOne({email: email});
-		if (emailCheck !== null) {
-			throw new serverError(serverErrorMsg);
-		} 
+		const exist = await User.find({ email });
+		console.log(exist);
+		if (exist.length > 0) {
+			res.status(409).send({ message: emailAlreadyUsed });
+			return;
+		}
 		const user = await User.findByIdAndUpdate(
 			id,
 			{ name, email, role },
