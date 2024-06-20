@@ -22,7 +22,7 @@ export const createUser = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const { name, email, password, role }: IUserDataIncome = req.body;
+	const { name, email, password }: IUserDataIncome = req.body;
 	try {
 		const exist = await User.find({ email });
 		if (exist.length > 0) {
@@ -34,7 +34,7 @@ export const createUser = async (
 			name,
 			email,
 			password: passwordHash,
-			role: role ? role : 'customer',
+			role: 'customer',
 		});
 		res.status(200).send({ data: user });
 	} catch (err) {
@@ -93,7 +93,6 @@ export const updateUser = async (
 	const { id } = req.params;
 	try {
 		const exist = await User.find({ email });
-		console.log(exist);
 		if (exist.length > 0) {
 			res.status(409).send({ message: emailAlreadyUsed });
 			return;
@@ -181,3 +180,27 @@ export const removeFavourite = async (
 		throw new serverError(serverErrorMsg);
 	}
 };
+
+// export const changeRole = async (
+// 	req: Request,
+// 	res: Response,
+// 	next: NextFunction,
+// ) => {
+// 	const { role } = req.body;
+// 	const { id: userId }: any = req.user;
+// 	try {
+// 		const user = await User.findByIdAndUpdate(
+// 			userId,
+// 			{ $pull: { role: role }},
+// 			{ new: true }
+// 		);
+// 		if (user) {
+// 			res.status(200).send({ data: user });
+// 			return;
+// 		} else {
+// 			throw new serverError(serverErrorMsg);
+// 		}
+// 	} catch (err) {
+// 		throw new serverError(serverErrorMsg);
+// 	}
+// }
