@@ -17,7 +17,7 @@ const goods = express.Router();
 
 goods.get('/', getAllGoods);
 
-goods.get('/filtered', getFilteredGoods);
+goods.get('/filtered', getFilteredGoods); // doesn't used yet
 
 goods.post('/', celebrate(createGoodValidation), createGood);
 

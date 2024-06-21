@@ -92,11 +92,6 @@ export const updateUser = async (
 	const { name, email, role }: IUserOptional = req.body;
 	const { id } = req.params;
 	try {
-		const exist = await User.find({ email });
-		if (exist.length > 0) {
-			res.status(409).send({ message: emailAlreadyUsed });
-			return;
-		}
 		const user = await User.findByIdAndUpdate(
 			id,
 			{ name, email, role },
@@ -110,7 +105,6 @@ export const updateUser = async (
 		}
 	} catch (err) {
 		next(new serverError(serverErrorMsg));
-		return;
 	}
 };
 
@@ -180,27 +174,3 @@ export const removeFavourite = async (
 		throw new serverError(serverErrorMsg);
 	}
 };
-
-// export const changeRole = async (
-// 	req: Request,
-// 	res: Response,
-// 	next: NextFunction,
-// ) => {
-// 	const { role } = req.body;
-// 	const { id: userId }: any = req.user;
-// 	try {
-// 		const user = await User.findByIdAndUpdate(
-// 			userId,
-// 			{ $pull: { role: role }},
-// 			{ new: true }
-// 		);
-// 		if (user) {
-// 			res.status(200).send({ data: user });
-// 			return;
-// 		} else {
-// 			throw new serverError(serverErrorMsg);
-// 		}
-// 	} catch (err) {
-// 		throw new serverError(serverErrorMsg);
-// 	}
-// }
